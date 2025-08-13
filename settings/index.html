@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings - Banana UBG</title>
+    <link id="favicon" rel="icon" type="image/png" href="logo.png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('banana.jpg') repeat;
+            background-size: 300px;
+            color: black;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .setting-group {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid yellow;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: yellow;
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #f4d800cc;
+        }
+
+        .info {
+            font-size: 14px;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            border: 2px solid yellow;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .back-link a:hover {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Settings</h1>
+
+    <div class="setting-group">
+        <label for="panicKey">Set Panic Key (press any single key)</label>
+        <input type="text" id="panicKey" maxlength="1" placeholder="e.g. P" autocomplete="off" spellcheck="false">
+        <div class="info">Press the key you want as your panic key. When pressed anywhere, it redirects to Google.</div>
+    </div>
+
+    <div class="setting-group">
+        <button id="cloakBtn">Activate Tab Cloaker</button>
+        <div class="info">Click to change tab title & favicon to "Work Stuff" to avoid suspicion.</div>
+    </div>
+
+    <div class="back-link">
+        <a href="index.html">← Back to Home</a>
+    </div>
+
+    <script>
+        let panicKey = null;
+
+        const panicInput = document.getElementById('panicKey');
+
+        // Save panic key to localStorage so it stays on reload
+        panicInput.addEventListener('keydown', (e) => {
+            e.preventDefault(); // prevent typing actual text
+            const key = e.key.toLowerCase();
+            panicKey = key;
+            panicInput.value = e.key.toUpperCase();
+            localStorage.setItem('panicKey', panicKey);
+        });
+
+        // Load saved panic key if any
+        window.addEventListener('load', () => {
+            const savedKey = localStorage.getItem('panicKey');
+            if (savedKey) {
+                panicKey = savedKey;
+                panicInput.value = savedKey.toUpperCase();
+            }
+        });
+
+        // Panic key listener
+        window.addEventListener('keydown', (e) => {
+            if (!panicKey) return;
+            if (e.key.toLowerCase() === panicKey) {
+                window.location.href = 'https://www.google.com';
+            }
+        });
+
+        // Tab cloaker
+        const cloakBtn = document.getElementById('cloakBtn');
+        cloakBtn.addEventListener('click', () => {
+            document.title = "Work Stuff";
+            const favicon = document.getElementById('favicon');
+            // Swap favicon to some boring icon (you can replace this URL)
+            favicon.href = 'https://www.google.com/favicon.ico';
+            alert('Tab cloaked! Title and favicon changed.');
+        });
+    </script>
+</body>
+</html>

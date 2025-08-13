@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>banana ubg</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta property="og:title" content="Banana UBG" />
+    <meta property="og:description" content="The best UBG game website with bananas and fun gameplay!" />
+    <meta property="og:image" content="https://bananaubg.pages.dev/logo.png" />
+    <meta property="og:url" content="https://bananaubg.pages.dev/" />
+    <meta property="og:type" content="website" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('banana.jpg') repeat;
+            background-size: 300px;
+            color: black;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-bottom: 3px solid yellow;
+            gap: 20px;
+        }
+
+        header img {
+            height: 60px;
+            width: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .header-tabs {
+            margin-left: auto; /* push tabs to right */
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-tabs .tab {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        .header-tabs .tab:hover {
+            background-color: yellow;
+            color: black;
+        }
+
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 2px solid yellow;
+            font-size: 16px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .games {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game {
+            background: rgba(255, 255, 255, 0.8);
+            margin: 15px;
+            padding: 10px;
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+            text-align: center;
+        }
+
+        .game img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .game:hover {
+            transform: scale(1.05);
+        }
+
+        .game a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Banana Logo">
+        <h1>banana ubg</h1>
+        <nav class="header-tabs">
+            <a href="/proxys" class="tab">Proxys</a>
+            <a href="/socials" class="tab">Socials</a>
+            <a href="/settings" class="tab">Settings</a>
+        </nav>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search games...">
+    </div>
+
+    <section>
+        <h2>Featured Games</h2>
+        <div class="games" id="featuredGames">
+            <div class="game">
+                <img src="2048.webp" alt="Game 1">
+                <a href="/2048/index.html">2048</a>
+            </div>
+            <div class="game">
+                <img src="dogeminer.jpg" alt="Game 2">
+                <a href="/DogeMiner/index.html">DogeMiner</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>All Games</h2>
+        <div class="games" id="allGames">
+            <div class="game">
+                <img src="monkeymart.jpg" alt="Game 3">
+                <a href="/monkeymart/index.html">Monkey Mart</a>
+            </div>
+            <div class="game">
+                <img src="https://via.placeholder.com/200x120/ffeb3b/000000?text=Game+4" alt="Game 4">
+                <a href="#">Game 4</a>
+            </div>
+            <div class="game">
+                <img src="https://via.placeholder.com/200x120/ffeb3b/000000?text=Game+5" alt="Game 5">
+                <a href="#">Game 5</a>
+            </div>
+            <div class="game">
+                <img src="https://via.placeholder.com/200x120/ffeb3b/000000?text=Game+6" alt="Game 6">
+                <a href="#">Game 6</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let games = document.querySelectorAll('.game');
+
+            games.forEach(function(game) {
+                let title = game.querySelector('a').textContent.toLowerCase();
+                if (title.includes(filter)) {
+                    game.style.display = '';
+                } else {
+                    game.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
